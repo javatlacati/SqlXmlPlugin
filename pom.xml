@@ -60,6 +60,25 @@
             <artifactId>org-openide-windows</artifactId>
             <version>RELEASE74</version>
         </dependency>
+        <dependency>
+            <groupId>org.netbeans.modules</groupId>
+            <artifactId>org-netbeans-modules-db-sql-editor</artifactId>
+            <version>RELEASE74</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-modules-db</artifactId>
+            <version>RELEASE65</version>
+<!--            <scope>provided</scope>-->
+        </dependency>
+        <dependency>
+            <artifactId>org-netbeans-modules-db-core</artifactId>
+            <groupId>org.netbeans.modules</groupId>
+            <type>jar</type>
+            <version>RELEASE74</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
