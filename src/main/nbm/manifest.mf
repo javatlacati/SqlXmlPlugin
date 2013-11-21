@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+OpenIDE-Module-Layer: cz/syntea/nb/sqlxml/plugin/layer.xml
+OpenIDE-Module-Localizing-Bundle: cz/syntea/nb/sqlxml/plugin/Bundle.properties
