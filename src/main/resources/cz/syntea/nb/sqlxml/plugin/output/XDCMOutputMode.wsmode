@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : XDCMOutputMode.wsmode
+    Created on : 16. září 2010, 15:45
+    Author     : daniel
+    Description:
+        Purpose of the document follows.
+-->
+<!DOCTYPE mode PUBLIC
+          "-//NetBeans//DTD Mode Properties 2.0//EN"
+          "http://www.netbeans.org/dtds/mode-properties2_0.dtd">
+
+<mode version="2.0">
+    <module name="cz.syntea.nb.sqlxml.plugin" spec="1.3"/>
+    <name unique="XDCMOutputMode" />
+    <kind type="view" />
+    <state type="joined" />
+    <empty-behavior permanent="true" />
+</mode>

@@ -1,33 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN" "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
 <filesystem>
-<!--    <folder name="Actions">
-        <folder name="Build">
-            <file name="cz-syntea-nb-sqlxml-plugin-actions-RunSqlXmlAction.instance"/>
+    <folder name="Windows2">
+        <folder name="Components">
+            <file name="XDCMOutputTopComponent.settings" url="XDCMOutputTopComponentSettings.xml"/>
         </folder>
-    </folder>
-    <folder name="Editors">
-        <folder name="text">
-            <folder name="x-sql">
-                <folder name="Popup">
-                    <file name="cz-syntea-nb-sqlxml-plugin-actions-RunSqlXmlAction.shadow">
-                        <attr name="originalFile" stringvalue="Actions/Build/cz-syntea-nb-sqlxml-plugin-actions-RunSqlXmlAction.instance"/>
-                        <attr name="position" intvalue="400"/>
-                    </file>
-                </folder>
+        <folder name="Modes">
+	    <file name="XDCMOutputMode.wsmode" url="output/XDCMOutputMode.wsmode"/>
+            <folder name="output">
+                <file name="XDCMOutputTopComponent.wstcref" url="XDCMOutputTopComponentWstcref.xml"/>
             </folder>
         </folder>
     </folder>
-    <folder name="Loaders">
-        <folder name="text">
-            <folder name="x-sql">
-                <folder name="Actions">
-                    <file name="cz-syntea-nb-sqlxml-plugin-actions-RunSqlXmlAction.shadow">
-                        <attr name="originalFile" stringvalue="Actions/Build/cz-syntea-nb-sqlxml-plugin-actions-RunSqlXmlAction.instance"/>
-                        <attr name="position" intvalue="150"/>
-                    </file>
-                </folder>
-            </folder>
-        </folder>
-    </folder>-->
 </filesystem>
