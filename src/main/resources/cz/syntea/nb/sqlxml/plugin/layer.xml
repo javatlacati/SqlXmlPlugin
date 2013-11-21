@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN" "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
 <filesystem>
-    <folder name="Actions">
+<!--    <folder name="Actions">
         <folder name="Build">
             <file name="cz-syntea-nb-sqlxml-plugin-actions-RunSqlXmlAction.instance"/>
         </folder>
     </folder>
     <folder name="Editors">
         <folder name="text">
-            <folder name="javascript">
+            <folder name="x-sql">
                 <folder name="Popup">
                     <file name="cz-syntea-nb-sqlxml-plugin-actions-RunSqlXmlAction.shadow">
                         <attr name="originalFile" stringvalue="Actions/Build/cz-syntea-nb-sqlxml-plugin-actions-RunSqlXmlAction.instance"/>
@@ -29,5 +29,5 @@
                 </folder>
             </folder>
         </folder>
-    </folder>
+    </folder>-->
 </filesystem>
