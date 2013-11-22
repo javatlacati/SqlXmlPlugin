@@ -27,20 +27,13 @@ import cz.syntea.nb.sqlxml.plugin.output.XDCMOutputTopComponent;
 import cz.syntea.nb.sqlxml.plugin.output.XmlUtils;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLXML;
-import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 import org.netbeans.api.db.explorer.DatabaseConnection;
-import org.openide.DialogDescriptor;
-import org.openide.DialogDisplayer;
 import org.openide.ErrorManager;
-import org.openide.NotifyDescriptor;
 import org.openide.cookies.EditorCookie;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
@@ -59,7 +52,8 @@ import org.openide.util.NbBundle.Messages;
 )
 @ActionReferences({
     @ActionReference(path = "Loaders/text/x-sql/Actions", position = 50),
-    @ActionReference(path = "Editors/text/x-sql/Popup", position = 300)
+    @ActionReference(path = "Editors/text/x-sql/Popup", position = 300) 
+    
 })
 @Messages("CTL_RunSqlXmlAction=Run SQLXML")
 public final class RunSqlXmlAction implements ActionListener {

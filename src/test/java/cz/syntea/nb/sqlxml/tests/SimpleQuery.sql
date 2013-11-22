@@ -1,5 +1,5 @@
- SELECT XMLELEMENT(NAME "Subjects", -- root element name
-                  XMLAGG(-- aggregation over the rows	
+ SELECT XMLELEMENT(NAME "Subjects",
+                  XMLAGG(	
                   XMLELEMENT(NAME "Contact",
                     XMLATTRIBUTES(cust.EMPJMENO AS "Name",
                                 cust.EMPPRIJMENI)
