@@ -24,22 +24,29 @@
 package cz.syntea.nb.sqlxml.plugin.actions;
 
 import cz.syntea.nb.sqlxml.plugin.output.XDCMOutputTopComponent;
+import cz.syntea.nb.sqlxml.plugin.output.XmlUtils;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.PreparedStatement;
+import java.io.BufferedWriter;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLXML;
 import javax.swing.JOptionPane;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.StyledDocument;
 import org.netbeans.api.db.explorer.DatabaseConnection;
-import org.netbeans.modules.db.api.sql.execute.SQLExecuteCookie;
-import org.netbeans.modules.db.sql.loader.SQLEditorSupport;
+import org.openide.DialogDescriptor;
+import org.openide.DialogDisplayer;
+import org.openide.ErrorManager;
+import org.openide.NotifyDescriptor;
 import org.openide.cookies.EditorCookie;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
-import org.openide.filesystems.FileUtil;
 import org.openide.util.Exceptions;
-import org.openide.util.Mutex.Action;
 import org.openide.util.NbBundle.Messages;
 
 @ActionID(
@@ -68,23 +75,46 @@ public final class RunSqlXmlAction implements ActionListener {
         //FileUtil.getConfigObject("path/to/print/action/in/layer.xml", Action.class).actionPerformed(ev);
         // SQLEditorSupport sQLEditorSupport = (SQLEditorSupport)context;
         //SQLExecuteCookie sQLEditorSupport = (SQLExecuteCookie)context;
-        Object invoked;
-        try {
-            invoked = context.getClass().getDeclaredMethod("getDatabaseConnection").invoke((Object)context);
-            if(invoked==null)return;
-            DatabaseConnection databaseConnection = (DatabaseConnection) invoked;
-        
-            JOptionPane.showMessageDialog(null, databaseConnection.getJDBCConnection());
-        } catch (Exception ex) {
-            Exceptions.printStackTrace(ex);
-        }
-        
-        
         XDCMOutputTopComponent out;
         out = XDCMOutputTopComponent.getDefault();
+        Object invoked;
+        try {
+            invoked = context.getClass().getDeclaredMethod("getDatabaseConnection").invoke((Object) context);
+            if (invoked == null) {
+                return;
+            }
+            DatabaseConnection databaseConnection = (DatabaseConnection) invoked;
+            Connection conn = databaseConnection.getJDBCConnection();
+            if(conn==null)return;
+            ResultSet rs = conn.createStatement().executeQuery(getSql());
+            if (rs.next()) {
+                SQLXML sqlxml = rs.getSQLXML(1);
+                out.printXML(XmlUtils.format(sqlxml.getString()));
+                out.open();
+                out.requestActive();
+            }
+            rs.close();
+           // JOptionPane.showMessageDialog(null, databaseConnection.getJDBCConnection());
+        } catch (Exception ex) {
+
+            ErrorManager.getDefault().notify(ex);
+            out.printXML(getSql());
+                out.open();
+                out.requestActive();
+            //Exceptions.printStackTrace(ex);
+        }
+
    //     out.printXML("<a ddd=\""+sQLEditorSupport.getDatabaseConnection().getDisplayName()+"\"/>");
-        out.printXML("<a ddd=\"dfgdfg\"/>");
-        out.open();
-        out.requestActive();
+        //out.printXML("<a ddd=\"dfgdfg\"/>");
+    }
+
+    private String getSql() {
+        try {
+            StyledDocument document = context.getDocument();
+            return document.getText(0, document.getLength());
+        } catch (BadLocationException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        return null;
     }
 }
