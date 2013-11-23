@@ -12,4 +12,25 @@
             </folder>
         </folder>
     </folder>
+    
+        <!-- Shortcuts -->
+    <!-- D-F5 = Ctrl+F5-->
+<!--    <folder name="Keymaps">
+        <folder name="NetBeans">
+            <file name="A-S-F7.shadow">
+                <attr name="originalFile" stringvalue="Actions/Debug/org-sodbeans-actions-SodbeansStepBackIntoAction.instance"/>
+            </file>
+
+            <file name="A-S-F8.shadow">
+                <attr name="originalFile" stringvalue="Actions/Debug/org-sodbeans-actions-SodbeansStepBackOverAction.instance"/>
+            </file>
+
+            <file name="A-S-F4.shadow">
+                <attr name="originalFile" stringvalue="Actions/Debug/org-sodbeans-actions-SodbeansRunBackToCursorAction.instance"/>
+            </file>
+            <file name="D-F10.shadow">
+                <attr name="originalFile" stringvalue="Actions/Debug/org-sodbeans-actions-SodbeansRewindDebuggerAction.instance"/>
+            </file>
+        </folder>
+    </folder>-->
 </filesystem>
