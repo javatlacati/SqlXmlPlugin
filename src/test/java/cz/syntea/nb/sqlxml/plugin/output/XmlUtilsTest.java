@@ -1,7 +1,7 @@
 /*
  * The MIT License
  *
- * Copyright 2013 daniel.
+ * Copyright 2013 Daniel Kec <daniel at kecovi.cz>.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,49 +22,29 @@
  * THE SOFTWARE.
  */
 
-package cz.syntea.nb.sqlxml.plugin.actions;
+package cz.syntea.nb.sqlxml.plugin.output;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
- * @author Daniel Kec
+ * @author Daniel Kec <daniel at kecovi.cz>
  */
-public class ToolBarPresenter extends JPanel {
-
-
-        private JLabel comboLabel;
-
-
-        public ToolBarPresenter() {
-            initComponents();
-        }
-
-        public Dimension getMinimumSize() {
-            Dimension dim = super.getMinimumSize();
-            return new Dimension(0, dim.height);
-        }
-
-
-        private void initComponents() {
-            setLayout(new BorderLayout(4, 0));
-            setBorder(new EmptyBorder(0, 2, 0, 8));
-            setOpaque(false);
-
-
-            comboLabel = new JLabel();
-            comboLabel.setText("Ahoj svete");
-            comboLabel.setOpaque(false);
-            //comboLabel.setLabelFor(combo);
-            add(comboLabel, BorderLayout.WEST);
-        }
-
-        public void setEnabled(boolean enabled) {
-            super.setEnabled(enabled);
-        }
+public class XmlUtilsTest {
+    
+    public XmlUtilsTest() {
     }
 
+    /**
+     * Test of format method, of class XmlUtils.
+     */
+    @Test
+    public void testFormat() {
+        System.out.println("format");
+        String stringXml = "<a><b/></a>";      
+        String result = XmlUtils.format(stringXml);
+        assertTrue(result.matches(".*<a>\\s*\\n\\s*<b/>\\s*\\n\\s*</a>\\s*"));
+    }
+    
+}

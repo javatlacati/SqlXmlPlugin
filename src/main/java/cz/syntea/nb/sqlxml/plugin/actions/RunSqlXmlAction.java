@@ -32,14 +32,17 @@ import java.sql.ResultSet;
 import java.sql.SQLXML;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
+import org.netbeans.api.db.explorer.ConnectionManager;
 import org.netbeans.api.db.explorer.DatabaseConnection;
-import org.openide.ErrorManager;
+import org.netbeans.modules.db.api.sql.execute.SQLExecuteCookie;
 import org.openide.cookies.EditorCookie;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
 import org.openide.util.Exceptions;
+import org.openide.util.Lookup;
+import org.openide.util.Mutex;
 import org.openide.util.NbBundle.Messages;
 
 @ActionID(
@@ -68,8 +71,10 @@ public final class RunSqlXmlAction implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent ev) {
         //FileUtil.getConfigObject("path/to/print/action/in/layer.xml", Action.class).actionPerformed(ev);
-        // SQLEditorSupport sQLEditorSupport = (SQLEditorSupport)context;
+        //SQLEditorSupport sQLEditorSupport = (SQLEditorSupport)context;
         //SQLExecuteCookie sQLEditorSupport = (SQLExecuteCookie)context;
+        
+        //System.out.println(""+Lookup.getDefault().lookup(SQLExecuteCookie.class));
         XDCMOutputTopComponent out;
         out = XDCMOutputTopComponent.getDefault();
         Object invoked;
@@ -78,7 +83,16 @@ public final class RunSqlXmlAction implements ActionListener {
             if (invoked == null) {
                 return;
             }
-            DatabaseConnection databaseConnection = (DatabaseConnection) invoked;
+            final DatabaseConnection databaseConnection = (DatabaseConnection) invoked;
+            // Reconnect when datasource is not connected
+            Mutex.EVENT.readAccess(new Mutex.Action<Void>() {
+                    @Override
+                    public Void run() {
+                        ConnectionManager.getDefault().showConnectionDialog(databaseConnection);
+                        return null;
+                    }
+            });
+            
             Connection conn = databaseConnection.getJDBCConnection();
             if(conn==null)return;
             ResultSet rs = conn.createStatement().executeQuery(getSql());
@@ -89,18 +103,9 @@ public final class RunSqlXmlAction implements ActionListener {
                 out.requestActive();
             }
             rs.close();
-           // JOptionPane.showMessageDialog(null, databaseConnection.getJDBCConnection());
         } catch (Exception ex) {
-
-            ErrorManager.getDefault().notify(ex);
-            out.printXML(getSql());
-                out.open();
-                out.requestActive();
-            //Exceptions.printStackTrace(ex);
+            Exceptions.printStackTrace(ex);
         }
-
-   //     out.printXML("<a ddd=\""+sQLEditorSupport.getDatabaseConnection().getDisplayName()+"\"/>");
-        //out.printXML("<a ddd=\"dfgdfg\"/>");
     }
 
     private String getSql() {
