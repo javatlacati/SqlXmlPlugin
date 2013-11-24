@@ -1,3 +1,5 @@
+package cz.syntea.nb.sqlxml.plugin.output;
+
 /*
  *  Copyright 2009 Syntea software group a.s.
  * 
@@ -8,13 +10,12 @@
  *  Tento soubor muze byt pouzit, kopirovan, modifikovan a siren pouze v souladu
  *  s licencnimi podminkami uvedenymi v prilozenem souboru LICENSE.TXT.
  */
-package cz.syntea.nb.sqlxml.plugin.output;
 
 import java.io.Serializable;
 import java.util.logging.Logger;
 import javax.swing.text.EditorKit;
 import org.openide.text.CloneableEditorSupport;
-import org.openide.util.NbBundle;
+import org.openide.util.ImageUtilities;
 import org.openide.windows.Mode;
 import org.openide.windows.TopComponent;
 import org.openide.windows.WindowManager;
@@ -26,7 +27,9 @@ public final class XDCMOutputTopComponent extends TopComponent {
 
   private static XDCMOutputTopComponent instance;
   /** path to the icon used by the component and its open action */
-  //static final String ICON_PATH = "cz/syntea/xdef/nb/createmode/consxicon.png";
+  public static final String PATH_ICON_SAVE = "/cz/syntea/nb/sqlxml/plugin/save.png";
+  public static final String PATH_ICON_COPY = "/cz/syntea/nb/sqlxml/plugin/copy.png";
+  public static final String PATH_ICON_RUN = "/cz/syntea/nb/sqlxml/plugin/run.png";    
   private static final String PREFERRED_ID = "XDCMOutputTopComponent";
   private static final long serialVersionUID = 8309390065262805339L;
 
@@ -34,13 +37,11 @@ public final class XDCMOutputTopComponent extends TopComponent {
 	initComponents();
 	setName("SQLXML");
 	setToolTipText("SQLXML Output");
-	//setIcon(ImageUtilities.loadImage(ICON_PATH, true));
-	//BaseTextUI eui = new BaseTextUI();
-	//eui.installUI(jEditorPane1);
+	setIcon(ImageUtilities.loadImage(PATH_ICON_RUN, true));
+        saveButton.setIcon(ImageUtilities.loadImageIcon(PATH_ICON_SAVE, true));
+        copyButton.setIcon(ImageUtilities.loadImageIcon(PATH_ICON_COPY, true));
 	EditorKit kit = CloneableEditorSupport.getEditorKit("text/xml");
 	jEditorPane1.setEditorKit(kit);
-	//JComponent myEditorComponent =
-	//		Utilities.getEditorUI(jEditorPane1).getComponent();
   }
 
   /** This method is called from within the constructor to
@@ -52,11 +53,23 @@ public final class XDCMOutputTopComponent extends TopComponent {
     private void initComponents() {
 
         jToolBar1 = new javax.swing.JToolBar();
+        saveButton = new javax.swing.JButton();
+        copyButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jEditorPane1 = new javax.swing.JEditorPane();
 
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
+
+        saveButton.setFocusable(false);
+        saveButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        saveButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(saveButton);
+
+        copyButton.setFocusable(false);
+        copyButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        copyButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(copyButton);
 
         jScrollPane1.setViewportView(jEditorPane1);
 
@@ -77,9 +90,11 @@ public final class XDCMOutputTopComponent extends TopComponent {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton copyButton;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
 
   /**
