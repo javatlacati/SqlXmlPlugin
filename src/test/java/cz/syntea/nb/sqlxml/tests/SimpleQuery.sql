@@ -1,4 +1,4 @@
- SELECT XMLELEMENT(NAME "Subjects", 
+SELECT XMLELEMENT(NAME "Subjects", 
                   XMLAGG(
                   XMLELEMENT(NAME "Contact",
                     XMLATTRIBUTES(cust.EMPJMENO    AS "FirstName",
@@ -6,5 +6,5 @@
                               )
                         )
                   )
-FROM DN.OR_SUBJEKTZAZNAM AS cust 
+FROM DN.OR_SUBJEKTZAZNAM AS cust
 WHERE cust.EMPPRIJMENI LIKE 'Kec'

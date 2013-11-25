@@ -25,6 +25,7 @@ package cz.syntea.nb.sqlxml.plugin.actions;
 
 import cz.syntea.nb.sqlxml.plugin.output.XDCMOutputTopComponent;
 import cz.syntea.nb.sqlxml.plugin.output.XmlUtils;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -40,7 +41,9 @@ import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
+import org.openide.awt.NotificationDisplayer;
 import org.openide.util.Exceptions;
+import org.openide.util.ImageUtilities;
 import org.openide.util.Mutex;
 import org.openide.util.NbBundle.Messages;
 
@@ -120,10 +123,35 @@ public final class RunSqlXmlAction implements ActionListener {
     private String getSql() {
         try {
             StyledDocument document = context.getDocument();
-            return document.getText(0, document.getLength());
+            String text = document.getText(0, document.getLength());
+            //It have to be only one query
+            if(text.contains(";")){
+                int[] pos = calculatePos(text, ";");
+                NotificationDisplayer.getDefault().notify(
+                        "SqlXml Plugin",
+                        ImageUtilities.loadImageIcon("/cz/syntea/nb/sqlxml/plugin/run.png", true), 
+                        "Please remove the semicolon, query must have only one statement.\n"
+                      + "Semicolon is located on the row= "+pos[0]+", column= "+pos[1],
+                        null);
+            }
+            return text;
         } catch (BadLocationException ex) {
             Exceptions.printStackTrace(ex);
         }
         return null;
+    }
+    
+    private int[] calculatePos(String text,String mask){
+        int[] vector = new int[2];
+        try{
+        int index = text.indexOf(mask);
+        String beforeText = text.substring(0, index+1);
+        String[] beforeLines = beforeText.split("\n");
+        vector[0] = beforeLines.length;
+        vector[1] = beforeLines[beforeLines.length-1].length();
+        }catch(Exception e){
+            vector=new int[]{0,0};
+        }
+        return vector;
     }
 }
