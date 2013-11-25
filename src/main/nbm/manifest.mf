@@ -1,3 +1,7 @@
 Manifest-Version: 1.0
+Created-By: Daniel Kec
+Specification-Vendor: Daniel Kec
+Bundle-Vendor: Daniel Kec
+OpenIDE-Module-Display-Category: SQL
 OpenIDE-Module-Layer: cz/syntea/nb/sqlxml/plugin/layer.xml
 OpenIDE-Module-Localizing-Bundle: cz/syntea/nb/sqlxml/plugin/Bundle.properties
