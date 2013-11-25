@@ -29,6 +29,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.SQLXML;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
@@ -73,6 +74,7 @@ public final class RunSqlXmlAction implements ActionListener {
         //SQLExecuteCookie sQLEditorSupport = (SQLExecuteCookie)context;
         
         //System.out.println(""+Lookup.getDefault().lookup(SQLExecuteCookie.class));
+        
         XDCMOutputTopComponent out;
         out = XDCMOutputTopComponent.getDefault();
         Object invoked;
@@ -101,6 +103,15 @@ public final class RunSqlXmlAction implements ActionListener {
                 out.requestActive();
             }
             rs.close();
+
+        } catch (SQLException ex) {
+            try {
+                // when there is error in the query, lets run standard run statement action 
+                // it will show errors by standard means
+                context.getClass().getDeclaredMethod("execute").invoke((Object) context);
+            } catch (Exception ex1) {
+                Exceptions.printStackTrace(ex1);
+            }
         } catch (Exception ex) {
             Exceptions.printStackTrace(ex);
         }
