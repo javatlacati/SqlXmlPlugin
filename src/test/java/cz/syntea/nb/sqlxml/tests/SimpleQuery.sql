@@ -7,4 +7,4 @@
                         )
                   )
 FROM DN.OR_SUBJEKTZAZNAM AS cust 
-WHERE cust.EMPPRIJMENI LIKE 'Kec'
+--WHERE cust.EMPPRIJMENI LIKE 'Kec'                                                                                                                                                                                                                                                                                                                                                                                                     

@@ -33,7 +33,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -47,11 +46,22 @@ import org.xml.sax.SAXException;
  * @author Daniel Kec
  */
 public class XmlUtils {
+    
     public static String format(String stringXml) {
+        return format(stringXml,null);
+    }
+    
+    public static String format(String stringXml,String encoding) {
         try {
             TransformerFactory transfac = TransformerFactory.newInstance();
             Transformer trans = transfac.newTransformer();
-            trans.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+            if(encoding!=null){
+                trans.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+                trans.setOutputProperty(OutputKeys.ENCODING, encoding);
+            }else{
+                trans.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+            }
+                
             trans.setOutputProperty(OutputKeys.INDENT, "yes");
             StringWriter stringWriter = new StringWriter();
             StreamResult streamResult = new StreamResult(stringWriter);

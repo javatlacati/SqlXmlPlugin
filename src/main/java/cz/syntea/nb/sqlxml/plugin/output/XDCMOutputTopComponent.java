@@ -11,10 +11,17 @@ package cz.syntea.nb.sqlxml.plugin.output;
  *  s licencnimi podminkami uvedenymi v prilozenem souboru LICENSE.TXT.
  */
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.text.EditorKit;
 import org.openide.text.CloneableEditorSupport;
+import org.openide.util.Exceptions;
 import org.openide.util.ImageUtilities;
 import org.openide.windows.Mode;
 import org.openide.windows.TopComponent;
@@ -64,11 +71,21 @@ public final class XDCMOutputTopComponent extends TopComponent {
         saveButton.setFocusable(false);
         saveButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         saveButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
         jToolBar1.add(saveButton);
 
         copyButton.setFocusable(false);
         copyButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         copyButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        copyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                copyButtonActionPerformed(evt);
+            }
+        });
         jToolBar1.add(copyButton);
 
         jScrollPane1.setViewportView(jEditorPane1);
@@ -88,6 +105,41 @@ public final class XDCMOutputTopComponent extends TopComponent {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        FileOutputStream   fos = null;
+        OutputStreamWriter osw = null;
+      try {
+          JFileChooser chooser = new JFileChooser();
+          chooser.setAccessory(new JLabel("baf"));
+          chooser.setApproveButtonText("Save");
+          int i = chooser.showSaveDialog(this);
+          if(i!=JFileChooser.APPROVE_OPTION)return;
+          File file = chooser.getSelectedFile();
+          fos = new FileOutputStream(file);
+          osw = new OutputStreamWriter(fos, "UTF-8");          
+          osw.append(XmlUtils.format(jEditorPane1.getText(), "UTF-8"));
+          osw.flush();       
+      } catch (IOException ex) {
+          Exceptions.printStackTrace(ex);
+      } finally {
+          try {
+              if(osw!=null)osw.close();
+              if(fos!=null)fos.close();
+          } catch (IOException ex) {
+              Exceptions.printStackTrace(ex);
+          }
+      }
+        
+        
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void copyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyButtonActionPerformed
+
+        ClipBoard clip = new ClipBoard();
+        clip.setClipboardContents(jEditorPane1.getText());
+        
+    }//GEN-LAST:event_copyButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton copyButton;
