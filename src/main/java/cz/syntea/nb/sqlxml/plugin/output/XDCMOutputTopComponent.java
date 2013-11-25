@@ -18,7 +18,6 @@ import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
-import javax.swing.JLabel;
 import javax.swing.text.EditorKit;
 import org.openide.text.CloneableEditorSupport;
 import org.openide.util.Exceptions;
@@ -68,6 +67,7 @@ public final class XDCMOutputTopComponent extends TopComponent {
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
 
+        saveButton.setToolTipText("Save to file"); // NOI18N
         saveButton.setFocusable(false);
         saveButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         saveButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -78,6 +78,7 @@ public final class XDCMOutputTopComponent extends TopComponent {
         });
         jToolBar1.add(saveButton);
 
+        copyButton.setToolTipText("Copy to clipboard"); // NOI18N
         copyButton.setFocusable(false);
         copyButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         copyButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -111,7 +112,7 @@ public final class XDCMOutputTopComponent extends TopComponent {
         OutputStreamWriter osw = null;
       try {
           JFileChooser chooser = new JFileChooser();
-          chooser.setAccessory(new JLabel("baf"));
+         // chooser.setAccessory(new JLabel("baf"));
           chooser.setApproveButtonText("Save");
           int i = chooser.showSaveDialog(this);
           if(i!=JFileChooser.APPROVE_OPTION)return;

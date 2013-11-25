@@ -52,7 +52,7 @@ import org.openide.util.NbBundle.Messages;
         displayName = "#CTL_RunSqlXmlAction"
 )
 @ActionReferences({
-    @ActionReference(path = "Loaders/text/x-sql/Actions", position = 50),
+   // @ActionReference(path = "Loaders/text/x-sql/Actions", position = 50),
     @ActionReference(path = "Editors/text/x-sql/Popup", position = 300),
     @ActionReference(path = "Shortcuts", name="D-S-X")
     

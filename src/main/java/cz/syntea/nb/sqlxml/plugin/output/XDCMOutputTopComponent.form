@@ -41,6 +41,7 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="saveButton">
           <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Save to file" noResource="true"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
@@ -51,6 +52,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="copyButton">
           <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Copy to clipboard" noResource="true"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
