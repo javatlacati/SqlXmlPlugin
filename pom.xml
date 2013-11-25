@@ -7,10 +7,17 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>nbm</packaging>
 
-    <name>SqlXmlPlugin</name>
-
+    <name>SqlXml Plugin</name>
+    <description>
+        SqlXml plugin is adding context menu action to the sql editor, 
+        which can execute SQLXML query and show the SQLXML datatype as XML 
+        document. Result of the query must have SQLXML type in first column
+        of the first row.
+    </description>
     <properties>
+        <netbeans.hint.displayName>SqlXml Plugin</netbeans.hint.displayName>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <netbeans.version>RELEASE74</netbeans.version>
     </properties>
 
     <repositories>
