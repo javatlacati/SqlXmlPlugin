@@ -59,8 +59,9 @@ public class SqlXmlCompletionProvider implements CompletionProvider {
             protected void query(CompletionResultSet completionResultSet, Document document, int caretOffset) {
                 String filter = null;
                 int startOffset = caretOffset - 1;
-
+                
                 try {
+                    if(ContextFilter.outOfAllowed(document.getText(0, caretOffset).trim()))return;
                     final StyledDocument bDoc = (StyledDocument) document;
                     final int lineStartOffset = getRowFirstNonWhite(bDoc, caretOffset);
                     final char[] line = bDoc.getText(lineStartOffset, caretOffset - lineStartOffset).toCharArray();
