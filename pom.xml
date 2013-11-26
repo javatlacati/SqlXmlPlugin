@@ -105,7 +105,10 @@
                 <extensions>true</extensions>
                 <configuration>
                     <author>Daniel Kec</author> 
-                    
+                    <keystore>./danielkec.jks</keystore>
+                    <keystorealias>danielkec</keystorealias>
+                    <keystorepassword></keystorepassword>
+                    <homePageUrl>https://github.com/danielkec/SqlXmlPlugin</homePageUrl>
                     <publicPackages>
                         <publicPackage>cz.syntea.nb.sqlxml.plugin.actions</publicPackage>
                         <publicPackage>cz.syntea.nb.sqlxml.plugin.output</publicPackage>
