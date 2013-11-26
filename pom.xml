@@ -4,7 +4,7 @@
 
     <groupId>cz.syntea.nb.sqlxml</groupId>
     <artifactId>SqlXmlPlugin</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
     <packaging>nbm</packaging>
     <name>SqlXml Plugin</name>
     
@@ -94,6 +94,22 @@
             <type>jar</type>
             <version>RELEASE74</version>
         </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-modules-editor-completion</artifactId>
+            <version>RELEASE74</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-modules-websvc-jaxws21api</artifactId>
+            <version>RELEASE74</version>          
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-modules-xml-jaxb-api</artifactId>
+            <version>RELEASE74</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -108,9 +124,11 @@
                     <keystore>./danielkec.jks</keystore>
                     <keystorealias>danielkec</keystorealias>
                     <keystorepassword></keystorepassword>
+                    <requiresRestart>true</requiresRestart>
                     <homePageUrl>https://github.com/danielkec/SqlXmlPlugin</homePageUrl>
-                    <publicPackages>
+                    <publicPackages>    
                         <publicPackage>cz.syntea.nb.sqlxml.plugin.actions</publicPackage>
+                        <publicPackage>cz.syntea.nb.sqlxml.plugin.completion</publicPackage>
                         <publicPackage>cz.syntea.nb.sqlxml.plugin.output</publicPackage>
                         <publicPackage>cz.syntea.nb.sqlxml.plugin.utils</publicPackage>
                     </publicPackages>
@@ -138,5 +156,6 @@
                 </configuration>
             </plugin>
         </plugins>
+ 
     </build>
 </project>

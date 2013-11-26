@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+The MIT License
+
+Copyright 2013 Daniel Kec <daniel at kecovi.cz>.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-->
+
+
+<SqlXmlCompletionTokens>
+    <CompletionItem name="XMLELEMENT"    insertText='XMLELEMENT(NAME "")' caret="-2">
+        <Documentation>The XMLELEMENT function is the basic unit for turning column data into XML fragments.                        
+&lt;div style="background-color: #E0EBEB;"&gt;
+&lt;pre&gt;
+XMLELEMENT 
+ ( NAME  identifier
+    [, XML_attributes_clause ]
+    [, value_expr [ AS c_alias ]
+      [, value_expr [ AS c_alias ]
+    ]...
+ )
+ &lt;/pre&gt;
+ &lt;/div&gt;
+        </Documentation>
+    </CompletionItem>
+    <CompletionItem name="XMLATTRIBUTES" insertText='XMLATTRIBUTES()' parent="XMLELEMENT" caret="-1">
+        <Documentation>The XMLATRIBUTES function converts column data into attributes of the parent element. The function call should contain one or more columns in a comma separated list. The attribute names will match the column names using the default uppercase unless an alias is used.
+&lt;div style="background-color: #E0EBEB;"&gt;
+&lt;pre&gt;
+XMLATTRIBUTES
+  (value_expr [ AS c_alias ]
+    [, value_expr [ AS c_alias ]
+      ]...
+  )
+ &lt;/pre&gt;
+ &lt;/div&gt;
+        </Documentation>
+    </CompletionItem>
+    <CompletionItem name="XMLAGG" insertText='XMLAGG()' parent="XMLELEMENT" caret="-1">
+        <Documentation>The XMLAGG function allows is to aggregate these separate fragments into a single fragment.
+&lt;div style="background-color: #E0EBEB;"&gt;
+&lt;pre&gt;
+XMLAGG(XMLType_instance [ order_by_clause ])            
+&lt;/pre&gt;
+&lt;/div&gt;
+        </Documentation>
+    </CompletionItem>
+    <CompletionItem name="XMLFOREST" insertText='XMLFOREST()' parent="XMLELEMENT" caret="-1">
+        <Documentation>XMLForest converts each of its argument parameters to XML, and then returns an XML fragment that is the concatenation of these converted arguments.
+&lt;div style="background-color: #E0EBEB;"&gt;
+&lt;pre&gt;
+XMLFOREST
+  ( value_expr [ AS c_alias ]
+    [, value_expr [ AS c_alias ]
+      ]...
+  )
+&lt;/pre&gt;
+&lt;/div&gt;
+
+
+
+        </Documentation>
+    </CompletionItem>
+    <CompletionItem name="XMLCONCAT" insertText='XMLCONCAT()' caret="-1">
+        <Documentation>XMLConcat takes as input a series of XMLType instances, concatenates the series of elements for each row, and returns the concatenated series. XMLConcat is the inverse of XMLSequence.
+&lt;div style="background-color: #E0EBEB;"&gt;
+&lt;pre&gt;
+XMLCONCAT(XMLType_instance [, XMLType_instance ]...)
+&lt;/pre&gt;
+&lt;/div&gt;
+        </Documentation>
+    </CompletionItem>
+    <CompletionItem name="XMLCOMMENT" insertText='XMLCOMMENT()' caret="-1">
+        <Documentation>XMLComment generates an XML comment using an evaluated result of value_expr. The value_expr must resolve to a string. It cannot contain two consecutive dashes (hyphens).
+&lt;div style="background-color: #E0EBEB;"&gt;
+&lt;pre&gt;
+XMLCOMMENT ( value_expr )
+&lt;/pre&gt;
+&lt;/div&gt;
+        </Documentation>
+    </CompletionItem>
+</SqlXmlCompletionTokens>

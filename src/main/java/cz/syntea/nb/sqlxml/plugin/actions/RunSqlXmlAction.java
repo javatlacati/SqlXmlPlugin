@@ -25,7 +25,6 @@ package cz.syntea.nb.sqlxml.plugin.actions;
 
 import cz.syntea.nb.sqlxml.plugin.output.XDCMOutputTopComponent;
 import cz.syntea.nb.sqlxml.plugin.output.XmlUtils;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;

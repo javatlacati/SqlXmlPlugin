@@ -33,9 +33,9 @@ public final class XDCMOutputTopComponent extends TopComponent {
 
   private static XDCMOutputTopComponent instance;
   /** path to the icon used by the component and its open action */
-  public static final String PATH_ICON_SAVE = "/cz/syntea/nb/sqlxml/plugin/save.png";
-  public static final String PATH_ICON_COPY = "/cz/syntea/nb/sqlxml/plugin/copy.png";
-  public static final String PATH_ICON_RUN = "/cz/syntea/nb/sqlxml/plugin/run.png";    
+  public static final String PATH_ICON_SAVE = "cz/syntea/nb/sqlxml/plugin/save.png";
+  public static final String PATH_ICON_COPY = "cz/syntea/nb/sqlxml/plugin/copy.png";
+  public static final String PATH_ICON_RUN = "cz/syntea/nb/sqlxml/plugin/run.png";    
   private static final String PREFERRED_ID = "XDCMOutputTopComponent";
   private static final long serialVersionUID = 8309390065262805339L;
 
