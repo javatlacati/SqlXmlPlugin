@@ -105,7 +105,7 @@ public class SqlXmlCompletionItem implements CompletionItem {
 
     @Override
     public int getPreferredWidth(Graphics graphics, Font font) {
-        return CompletionUtilities.getPreferredWidth(getText(), null, graphics, font);
+        return CompletionUtilities.getPreferredWidth(getText(), dbmss, graphics, font);
     }
 
     @Override

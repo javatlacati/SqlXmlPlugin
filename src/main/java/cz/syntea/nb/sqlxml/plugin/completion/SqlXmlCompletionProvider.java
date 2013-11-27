@@ -61,7 +61,10 @@ public class SqlXmlCompletionProvider implements CompletionProvider {
                 int startOffset = caretOffset - 1;
                 
                 try {
-                    if(ContextFilter.outOfAllowed(document.getText(0, caretOffset).trim()))return;
+                    if(ContextFilter.outOfAllowed(document.getText(0, caretOffset).trim())){
+                        completionResultSet.finish();
+                        return;
+                    }
                     final StyledDocument bDoc = (StyledDocument) document;
                     final int lineStartOffset = getRowFirstNonWhite(bDoc, caretOffset);
                     final char[] line = bDoc.getText(lineStartOffset, caretOffset - lineStartOffset).toCharArray();
