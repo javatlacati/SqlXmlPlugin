@@ -59,10 +59,14 @@ public class SqlXmlCompletionItem implements CompletionItem {
     private String name;
     @XmlAttribute(name="insertText")
     private String insertText;
+    @XmlAttribute()
+    private String dbmss;//suported by
     @XmlElement(name="Documentation")
     private String doc;
     @XmlAttribute
     private String parent;
+    @XmlElement
+    private String url = "http://architects.dzone.com/articles/sqlx-db-straight-xml-and-back";
     @XmlAttribute
     private int caret = 0;
     private static final ImageIcon runIcon = ImageUtilities.loadImageIcon(PATH_ICON_RUN, true);
@@ -105,10 +109,16 @@ public class SqlXmlCompletionItem implements CompletionItem {
     }
 
     @Override
-    public void render(Graphics g, Font defaultFont, Color defaultColor,
-            Color backgroundColor, int width, int height, boolean selected) {
-        CompletionUtilities.renderHtml(runIcon, getText(), null, g, defaultFont,
-                (selected ? Color.white : fieldColor), width, height, selected);
+    public void render(Graphics g, Font defaultFont, Color defaultColor,Color backgroundColor, int width, int height, boolean selected) {
+        CompletionUtilities.renderHtml(runIcon,
+                getText(), 
+                dbmss, 
+                g,
+                defaultFont,
+                (selected ? Color.white : fieldColor), 
+                width, 
+                height, 
+                selected);
     }
 
     @Override
@@ -116,7 +126,7 @@ public class SqlXmlCompletionItem implements CompletionItem {
         return new AsyncCompletionTask(new AsyncCompletionQuery() {
                         @Override
                         protected void query(CompletionResultSet crs, Document document, int i) {
-                                crs.setDocumentation(new SqlXmlCompletionDocumentation(doc));
+                                crs.setDocumentation(new SqlXmlCompletionDocumentation(doc,url));
                                 crs.finish();
                         }
                 });

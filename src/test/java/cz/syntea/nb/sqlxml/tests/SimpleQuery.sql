@@ -1,10 +1,10 @@
 
 SELECT XMLELEMENT(NAME "Subjects", 
-                  XMLAGG(
-                  XMLELEMENT(NAME "Contact",
+                  XMLAGG( 
+                  XMLELEMENT(NAME "Contact", 
                     XMLATTRIBUTES(cust.EMPJMENO    AS "FirstName",
                                   cust.EMPPRIJMENI AS "LastName")
-                              ) 
+                              ) XMLELEMENT(NAME "kdjhfhj")
                         )
                   ) 
 FROM DN.OR_SUBJEKTZAZNAM AS cust, 

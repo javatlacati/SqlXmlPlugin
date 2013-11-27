@@ -25,7 +25,11 @@ THE SOFTWARE.
 
 
 <SqlXmlCompletionTokens>
-    <CompletionItem name="XMLELEMENT"    insertText='XMLELEMENT(NAME "")' caret="-2">
+    <CompletionItem name="XMLELEMENT"    
+                    insertText='XMLELEMENT(NAME "")' 
+                    caret="-2"
+                    dbmss="db2,oracle,postgresql">
+        <url>https://publib.boulder.ibm.com/infocenter/db2luw/v9/topic/com.ibm.db2.udb.admin.doc/doc/r0022188.htm</url>
         <Documentation>The XMLELEMENT function is the basic unit for turning column data into XML fragments.                        
 &lt;div style="background-color: #E0EBEB;"&gt;
 &lt;pre&gt;
@@ -40,7 +44,12 @@ XMLELEMENT
  &lt;/div&gt;
         </Documentation>
     </CompletionItem>
-    <CompletionItem name="XMLATTRIBUTES" insertText='XMLATTRIBUTES()' parent="XMLELEMENT" caret="-1">
+    <CompletionItem name="XMLATTRIBUTES" 
+                    insertText='XMLATTRIBUTES()' 
+                    parent="XMLELEMENT" 
+                    caret="-1"
+                    dbmss="db2,oracle,postgresql">
+        <url>https://publib.boulder.ibm.com/infocenter/db2luw/v9/topic/com.ibm.db2.udb.admin.doc/doc/r0022184.htm</url>
         <Documentation>The XMLATRIBUTES function converts column data into attributes of the parent element. The function call should contain one or more columns in a comma separated list. The attribute names will match the column names using the default uppercase unless an alias is used.
 &lt;div style="background-color: #E0EBEB;"&gt;
 &lt;pre&gt;
@@ -53,7 +62,12 @@ XMLATTRIBUTES
  &lt;/div&gt;
         </Documentation>
     </CompletionItem>
-    <CompletionItem name="XMLAGG" insertText='XMLAGG()' parent="XMLELEMENT" caret="-1">
+    <CompletionItem name="XMLAGG" 
+                    insertText='XMLAGG()' 
+                    parent="XMLELEMENT" 
+                    caret="-1" 
+                    dbmss="db2,oracle,postgresql">
+        <url>https://publib.boulder.ibm.com/infocenter/db2luw/v9/topic/com.ibm.db2.udb.admin.doc/doc/r0022183.htm</url>
         <Documentation>The XMLAGG function allows is to aggregate these separate fragments into a single fragment.
 &lt;div style="background-color: #E0EBEB;"&gt;
 &lt;pre&gt;
@@ -62,7 +76,12 @@ XMLAGG(XMLType_instance [ order_by_clause ])
 &lt;/div&gt;
         </Documentation>
     </CompletionItem>
-    <CompletionItem name="XMLFOREST" insertText='XMLFOREST()' parent="XMLELEMENT" caret="-1">
+    <CompletionItem name="XMLFOREST" 
+                    insertText='XMLFOREST()' 
+                    parent="XMLELEMENT" 
+                    caret="-1" 
+                    dbmss="db2,oracle,postgresql">
+        <url>https://publib.boulder.ibm.com/infocenter/db2luw/v9/topic/com.ibm.db2.udb.admin.doc/doc/r0022189.htm</url>
         <Documentation>XMLForest converts each of its argument parameters to XML, and then returns an XML fragment that is the concatenation of these converted arguments.
 &lt;div style="background-color: #E0EBEB;"&gt;
 &lt;pre&gt;
@@ -78,8 +97,16 @@ XMLFOREST
 
         </Documentation>
     </CompletionItem>
-    <CompletionItem name="XMLCONCAT" insertText='XMLCONCAT()' caret="-1">
-        <Documentation>XMLConcat takes as input a series of XMLType instances, concatenates the series of elements for each row, and returns the concatenated series. XMLConcat is the inverse of XMLSequence.
+    <CompletionItem name="XMLCONCAT" 
+                    insertText='XMLCONCAT()' 
+                    caret="-1" 
+                    dbmss="db2,oracle,postgresql">
+        <url>https://publib.boulder.ibm.com/infocenter/db2luw/v9/topic/com.ibm.db2.udb.admin.doc/doc/r0022186.htm</url>
+        <Documentation>
+XMLConcat takes as input a series of XMLType instances, 
+concatenates the series of elements for each row, 
+and returns the concatenated series. 
+XMLConcat is the inverse of XMLSequence.
 &lt;div style="background-color: #E0EBEB;"&gt;
 &lt;pre&gt;
 XMLCONCAT(XMLType_instance [, XMLType_instance ]...)
@@ -87,8 +114,14 @@ XMLCONCAT(XMLType_instance [, XMLType_instance ]...)
 &lt;/div&gt;
         </Documentation>
     </CompletionItem>
-    <CompletionItem name="XMLCOMMENT" insertText='XMLCOMMENT()' caret="-1">
-        <Documentation>XMLComment generates an XML comment using an evaluated result of value_expr. The value_expr must resolve to a string. It cannot contain two consecutive dashes (hyphens).
+    <CompletionItem name="XMLCOMMENT" 
+                    insertText='XMLCOMMENT()' 
+                    caret="-1" 
+                    dbmss="db2,oracle,postgresql">
+        <url>https://publib.boulder.ibm.com/infocenter/db2luw/v9/topic/com.ibm.db2.udb.admin.doc/doc/r0022185.htm</url>
+        <Documentation>
+XMLComment generates an XML comment using an evaluated result of value_expr. 
+The value_expr must resolve to a string. It cannot contain two consecutive dashes (hyphens).
 &lt;div style="background-color: #E0EBEB;"&gt;
 &lt;pre&gt;
 XMLCOMMENT ( value_expr )
@@ -96,4 +129,81 @@ XMLCOMMENT ( value_expr )
 &lt;/div&gt;
         </Documentation>
     </CompletionItem>
+    <CompletionItem name="XMLSERIALIZE"
+                    insertText='XMLSERIALIZE()'
+                    caret="-1" 
+                    dbmss="db2,oracle">
+        <url>https://publib.boulder.ibm.com/infocenter/db2luw/v9/index.jsp?topic=%2Fcom.ibm.db2.udb.admin.doc%2Fdoc%2Fr0022194.htm</url>
+        <Documentation>
+XMLSerialize creates a string or LOB containing the contents of value_expr.
+&lt;ul&gt;          
+&lt;li&gt;If you specify DOCUMENT, then the value_expr must be a valid XML document.&lt;/li&gt;
+&lt;li&gt;If you specify CONTENT, then the value_expr need not be a singly rooted XML document. However it must be valid XML content.&lt;/li&gt;
+&lt;li&gt;The datatype specified can be a string type (VARCHAR2 or VARCHAR, but not NVARCHAR or NVARCHAR2) or CLOB . The default is CLOB.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div style="background-color: #E0EBEB;"&gt;
+&lt;pre&gt;
+XMLSERIALIZE
+  ( { DOCUMENT | CONTENT } value_expr
+      [ AS datatype ]
+  )            
+&lt;/pre&gt;
+&lt;/div&gt;
+        </Documentation>
+    </CompletionItem>
+    <CompletionItem name="XMLPARSE"
+                    insertText="XMLPARSE(DOCUMENT '')"
+                    caret="-2" 
+                    dbmss="db2,oracle">
+        <url>https://publib.boulder.ibm.com/infocenter/db2luw/v9/topic/com.ibm.db2.udb.admin.doc/doc/r0022191.htm</url>
+        <Documentation>
+&lt;h2&gt;DB2&lt;/h2&gt;
+The XMLPARSE function parses the argument as an XML document and returns an XML value.
+&lt;div style="background-color: #E0EBEB;"&gt;
+&lt;pre&gt;     
+XMLPARSE
+   (DOCUMENT value_expr 
+             { STRIP WHITESPACE | PRESERVE WHITESPACE }
+    )
+     
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;h2&gt;Oracle&lt;/h2&gt;
+XMLParse parses and generates an XML instance from the evaluated result of value_expr. 
+The value_expr must resolve to a string. 
+If value_expr resolves to null, then the function returns null.
+a character string or BLOB            
+&lt;ul&gt;  
+&lt;li&gt;If you specify DOCUMENT, then value_expr must resolve to a singly rooted XML document.&lt;/li&gt;
+&lt;li&gt;If you specify CONTENT, then value_expr must resolve to a valid XML value.&lt;/li&gt;
+&lt;li&gt;When you specify WELLFORMED, you are guaranteeing that value_expr resolves to a well-formed XML document, 
+            so the database does not perform validity checks to ensure that the input is well formed.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div style="background-color: #E0EBEB;"&gt;
+&lt;pre&gt;
+XMLPARSE
+  ({ DOCUMENT | CONTENT } value_expr [ WELLFORMED ]
+  ) 
+&lt;/pre&gt;
+&lt;/div&gt;
+        </Documentation>
+    </CompletionItem>
+<!--    <CompletionItem name=""
+                    insertText=''
+                    caret="-1" 
+                    dbmss="db2,oracle">
+        <url></url>
+        <Documentation>
+
+&lt;ul&gt;          
+&lt;li&gt; &lt;/li&gt;
+
+&lt;/ul&gt;
+&lt;div style="background-color: #E0EBEB;"&gt;
+&lt;pre&gt;
+ 
+&lt;/pre&gt;
+&lt;/div&gt;
+        </Documentation>
+    </CompletionItem>-->
 </SqlXmlCompletionTokens>

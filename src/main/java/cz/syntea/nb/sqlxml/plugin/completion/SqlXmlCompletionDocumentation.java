@@ -28,6 +28,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import javax.swing.Action;
 import org.netbeans.spi.editor.completion.CompletionDocumentation;
+import org.openide.awt.NotificationDisplayer;
+import org.openide.util.ImageUtilities;
 
 /**
  *
@@ -35,9 +37,11 @@ import org.netbeans.spi.editor.completion.CompletionDocumentation;
  */
 class SqlXmlCompletionDocumentation implements CompletionDocumentation {
     private final String doc;
+    private final String url;
 
-    public SqlXmlCompletionDocumentation(String doc) {
+    public SqlXmlCompletionDocumentation(String doc,String url) {
         this.doc = doc;
+        this.url = url;
     }
 
     @Override
@@ -48,7 +52,7 @@ class SqlXmlCompletionDocumentation implements CompletionDocumentation {
     @Override
     public URL getURL() {
         try {
-            return new URL("http://java.dzone.com/articles/sqlx-db-straight-xml-and-back");
+            return new URL(url);
         } catch (MalformedURLException ex) {
             return null;
         }
