@@ -4,7 +4,7 @@
 
     <groupId>cz.syntea.nb.sqlxml</groupId>
     <artifactId>SqlXmlPlugin</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
     <packaging>nbm</packaging>
     <name>SqlXml Plugin</name>
     
@@ -126,6 +126,8 @@
                     <keystorepassword></keystorepassword>
                     <requiresRestart>true</requiresRestart>
                     <homePageUrl>https://github.com/danielkec/SqlXmlPlugin</homePageUrl>
+                    <licenseName>MIT</licenseName>
+                    <licenseFile>./LICENSE</licenseFile>
                     <publicPackages>    
                         <publicPackage>cz.syntea.nb.sqlxml.plugin.actions</publicPackage>
                         <publicPackage>cz.syntea.nb.sqlxml.plugin.completion</publicPackage>

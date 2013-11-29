@@ -130,8 +130,8 @@ XMLCOMMENT ( value_expr )
         </Documentation>
     </CompletionItem>
     <CompletionItem name="XMLSERIALIZE"
-                    insertText='XMLSERIALIZE()'
-                    caret="-1" 
+                    insertText='XMLSERIALIZE(CONTENT  AS CLOB)'
+                    caret="-9" 
                     dbmss="db2,oracle">
         <url>https://publib.boulder.ibm.com/infocenter/db2luw/v9/index.jsp?topic=%2Fcom.ibm.db2.udb.admin.doc%2Fdoc%2Fr0022194.htm</url>
         <Documentation>

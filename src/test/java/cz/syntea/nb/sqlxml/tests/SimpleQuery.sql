@@ -1,5 +1,5 @@
 
-SELECT XMLELEMENT(NAME "Subjects", 
+SELECT  XMLELEMENT(NAME "Subjects",
                   XMLAGG( 
                   XMLELEMENT(NAME "Contact", 
                     XMLATTRIBUTES(cust.EMPJMENO    AS "FirstName",

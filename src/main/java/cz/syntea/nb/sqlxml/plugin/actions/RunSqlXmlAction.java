@@ -27,6 +27,10 @@ import cz.syntea.nb.sqlxml.plugin.output.XDCMOutputTopComponent;
 import cz.syntea.nb.sqlxml.plugin.output.XmlUtils;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.sql.Clob;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -80,6 +84,7 @@ public final class RunSqlXmlAction implements ActionListener {
         XDCMOutputTopComponent out;
         out = XDCMOutputTopComponent.getDefault();
         Object invoked;
+        Connection conn = null;
         try {
             invoked = context.getClass().getDeclaredMethod("getDatabaseConnection").invoke((Object) context);
             if (invoked == null) {
@@ -95,18 +100,57 @@ public final class RunSqlXmlAction implements ActionListener {
                     }
             });
             
-            Connection conn = databaseConnection.getJDBCConnection();
+            conn = databaseConnection.getJDBCConnection();
             if(conn==null)return;
             ResultSet rs = conn.createStatement().executeQuery(getSql());
-            if (rs.next()) {
-                SQLXML sqlxml = rs.getSQLXML(1);
-                out.printXML(XmlUtils.format(sqlxml.getString()));
-                out.open();
-                out.requestActive();
+            if (rs.next()&&rs.getMetaData().getColumnCount()!=0) {
+                Object o;
+                try{
+                    o = rs.getObject(1);
+                }catch(NullPointerException e){
+                    
+                    Exception e2 = new JDBCDriverProblemException(e);//Exceptions.attachMessage(e, "There is a problem with jdbc driver!!!");
+                    Exceptions.printStackTrace(e2);
+                    rs.close();
+                    return;
+                }
+                if(o instanceof SQLXML){
+                    SQLXML sqlxml = rs.getSQLXML(1);
+                    out.printXML(XmlUtils.format(sqlxml.getString()));
+                    out.open();
+                    out.requestActive();
+                }else if(o instanceof Clob){
+                    String result = clobToString((Clob)o);
+                    out.printXML(XmlUtils.format(result));
+                    out.open();
+                    out.requestActive();
+                }else if(o instanceof String){                  
+                    out.printXML(XmlUtils.format((String)o));
+                    out.open();
+                    out.requestActive();
+                }else{
+                    NotificationDisplayer.getDefault().notify(
+                        "SqlXml Plugin",
+                        ImageUtilities.loadImageIcon("/cz/syntea/nb/sqlxml/plugin/run.png", true), 
+                        "Unknow datatype in the first column of the first row.\n"
+                      + "Found datatype: "+o.getClass().getName()+",\n"
+                      + "Supported datatypes: SQLXML,Clob,String",
+                        null);
+                }
+                
             }
             rs.close();
 
         } catch (SQLException ex) {
+            if(ex.getMessage().contains("Unsupported feature")){
+                 NotificationDisplayer.getDefault().notify(
+                        "SqlXml Plugin",
+                        ImageUtilities.loadImageIcon("/cz/syntea/nb/sqlxml/plugin/run.png", true), 
+                        "JDBC Driver says: \"Unsupported feature\", more info in IDE Log.\n"
+                      + "If your driver doesn't support SQLXML type, use XMLSERIALIZE",
+                        null);
+            }
+            ex.printStackTrace();
             try {
                 // when there is error in the query, lets run standard run statement action 
                 // it will show errors by standard means
@@ -122,7 +166,11 @@ public final class RunSqlXmlAction implements ActionListener {
     private String getSql() {
         try {
             StyledDocument document = context.getDocument();
-            String text = document.getText(0, document.getLength());
+            String text = document.getText(0, document.getLength()).trim();
+            if(text.endsWith(";")){
+                text = text.substring(0,text.length()-1);
+            }
+            
             //It have to be only one query
             if(text.contains(";")){
                 int[] pos = calculatePos(text, ";");
@@ -152,5 +200,24 @@ public final class RunSqlXmlAction implements ActionListener {
             vector=new int[]{0,0};
         }
         return vector;
+    }
+
+        /**
+     * Prevede clob na string
+     * @param data clob na prevedeni
+     * @return vysledny string
+     * @throws SQLException
+     * @throws IOException 
+     */
+    public static String clobToString(Clob data) throws SQLException, IOException {
+        StringBuilder sb = new StringBuilder();
+        Reader reader = data.getCharacterStream();
+        BufferedReader br = new BufferedReader(reader);
+        String line;
+        while (null != (line = br.readLine())) {
+            sb.append(line);
+        }
+        br.close();
+        return sb.toString();
     }
 }
