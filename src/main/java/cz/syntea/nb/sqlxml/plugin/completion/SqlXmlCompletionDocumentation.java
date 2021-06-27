@@ -28,8 +28,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import javax.swing.Action;
 import org.netbeans.spi.editor.completion.CompletionDocumentation;
-import org.openide.awt.NotificationDisplayer;
-import org.openide.util.ImageUtilities;
 
 /**
  *
