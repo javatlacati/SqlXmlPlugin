@@ -2,11 +2,11 @@ package cz.syntea.nb.sqlxml.plugin.output;
 
 /*
  *  Copyright 2009 Syntea software group a.s.
- * 
+ *
  *  This file may be used, copied, modified and distributed only in accordance
  *  with the terms of the limited licence contained in the accompanying
  *  file LICENSE.TXT.
- * 
+ *
  *  Tento soubor muze byt pouzit, kopirovan, modifikovan a siren pouze v souladu
  *  s licencnimi podminkami uvedenymi v prilozenem souboru LICENSE.TXT.
  */
@@ -35,7 +35,7 @@ public final class XDCMOutputTopComponent extends TopComponent {
   /** path to the icon used by the component and its open action */
   public static final String PATH_ICON_SAVE = "cz/syntea/nb/sqlxml/plugin/save.png";
   public static final String PATH_ICON_COPY = "cz/syntea/nb/sqlxml/plugin/copy.png";
-  public static final String PATH_ICON_RUN = "cz/syntea/nb/sqlxml/plugin/run.png";    
+  public static final String PATH_ICON_RUN = "cz/syntea/nb/sqlxml/plugin/run.png";
   private static final String PREFERRED_ID = "XDCMOutputTopComponent";
   private static final long serialVersionUID = 8309390065262805339L;
 
@@ -114,32 +114,38 @@ public final class XDCMOutputTopComponent extends TopComponent {
           JFileChooser chooser = new JFileChooser();
          // chooser.setAccessory(new JLabel("baf"));
           chooser.setApproveButtonText("Save");
-          int i = chooser.showSaveDialog(this);
-          if(i!=JFileChooser.APPROVE_OPTION)return;
+          int saveDialog = chooser.showSaveDialog(this);
+          if(JFileChooser.APPROVE_OPTION != saveDialog) {
+              return;
+          }
           File file = chooser.getSelectedFile();
           fos = new FileOutputStream(file);
-          osw = new OutputStreamWriter(fos, "UTF-8");          
+          osw = new OutputStreamWriter(fos, "UTF-8");
           osw.append(XmlUtils.format(jEditorPane1.getText(), "UTF-8"));
-          osw.flush();       
+          osw.flush();
       } catch (IOException ex) {
           Exceptions.printStackTrace(ex);
       } finally {
           try {
-              if(osw!=null)osw.close();
-              if(fos!=null)fos.close();
+              if(null != osw) {
+                  osw.close();
+              }
+              if(null != fos) {
+                  fos.close();
+              }
           } catch (IOException ex) {
               Exceptions.printStackTrace(ex);
           }
       }
-        
-        
+
+
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void copyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copyButtonActionPerformed
 
         ClipBoard clip = new ClipBoard();
         clip.setClipboardContents(jEditorPane1.getText());
-        
+
     }//GEN-LAST:event_copyButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -150,24 +156,30 @@ public final class XDCMOutputTopComponent extends TopComponent {
     private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
 
-  /**
-   * Gets default instance. Do not use directly: reserved for *.settings files only,
-   * i.e. deserialization routines; otherwise you could get a non-deserialized instance.
-   * To obtain the singleton instance, use {@link #findInstance}.
-   */
+    /**
+     * Gets default instance.Do not use directly: reserved for *.settings files
+     * only, i.e. deserialization routines; otherwise you could get a
+     * non-deserialized instance. To obtain the singleton instance, use
+     * {@link #findInstance}.
+     *
+     * @return
+     */
   public static synchronized XDCMOutputTopComponent getDefault() {
-	if (instance == null) {
+	if (null == instance) {
 	  instance = new XDCMOutputTopComponent();
 	}
 	return instance;
   }
 
-  /**
-   * Obtain the XDCMOutputTopComponent instance. Never call {@link #getDefault} directly!
-   */
+    /**
+     * Obtain the XDCMOutputTopComponent instance.Never call {@link #getDefault}
+     * directly!
+     *
+     * @return
+     */
   public static synchronized XDCMOutputTopComponent findInstance() {
 	TopComponent win = WindowManager.getDefault().findTopComponent(PREFERRED_ID);
-	if (win == null) {
+	if (null == win) {
 	  Logger.getLogger(XDCMOutputTopComponent.class.getName()).warning(
 			  "Cannot find " + PREFERRED_ID + " component. It will not be located properly in the window system.");
 	  return getDefault();
@@ -196,7 +208,11 @@ public final class XDCMOutputTopComponent extends TopComponent {
 	// TODO add custom code on component closing
   }
 
-  /** replaces this in object stream */
+    /**
+     * replaces this in object stream
+     *
+     * @return
+     */
   @Override
   public Object writeReplace() {
 	return new ResolvableHelper();
@@ -217,9 +233,10 @@ public final class XDCMOutputTopComponent extends TopComponent {
   }
   private static final String MODE = "output"; // NOI18N
 
+  @Override
   public void open() {
-	Mode m = WindowManager.getDefault().findMode(MODE);
-	m.dockInto(this);
+	Mode mode = WindowManager.getDefault().findMode(MODE);
+	mode.dockInto(this);
 	super.open();
   }
 

@@ -29,7 +29,7 @@ package cz.syntea.nb.sqlxml.plugin.utils;
  * @author Daniel Kec <daniel at kecovi.cz>
  */
 public class UIUtils {
-    public static String PATH_ICON_SAVE = "/cz/syntea/nb/sqlxml/plugin/save.png";
-    public static String PATH_ICON_COPY = "/cz/syntea/nb/sqlxml/plugin/copy.png";
-    public static String PATH_ICON_RUN = "/cz/syntea/nb/sqlxml/plugin/run.png";    
+    public static final String PATH_ICON_SAVE = "/cz/syntea/nb/sqlxml/plugin/save.png";
+    public static final String PATH_ICON_COPY = "/cz/syntea/nb/sqlxml/plugin/copy.png";
+    public static final String PATH_ICON_RUN = "/cz/syntea/nb/sqlxml/plugin/run.png";
 }

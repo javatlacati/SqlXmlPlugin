@@ -31,14 +31,18 @@ package cz.syntea.nb.sqlxml.plugin.completion;
 class ContextFilter {
 
     static boolean outOfAllowed(String text) {
-        if(text.length()==0)return true;
-        if(text.endsWith("SELECT"))return false;
+        if(text.isEmpty()) {
+            return true;
+        }
+        if(text.endsWith("SELECT")) {
+            return false;
+        }
         String[] fromed = text.split("FROM");
         if(fromed.length>1){
             String toLastFrom = fromed[fromed.length-1];
-            if((!toLastFrom.contains("("))&&(!toLastFrom.contains("SELECT")))return true;
+            return (!toLastFrom.contains("(")) && (!toLastFrom.contains("SELECT"));
         }
         return false;
     }
-    
+
 }

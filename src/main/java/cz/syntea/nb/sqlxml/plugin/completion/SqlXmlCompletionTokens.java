@@ -48,10 +48,10 @@ public class SqlXmlCompletionTokens {
     private static SqlXmlCompletionTokens instance;
     @XmlElement(name = "CompletionItem")
     private List<SqlXmlCompletionItem> itemList;
-    
+
     private SqlXmlCompletionTokens(){}
     public static SqlXmlCompletionTokens getInstance(){
-        if(instance==null){
+        if(null == instance){
             try {
                 instance = unmarshal(new Scanner(SqlXmlCompletionTokens.class.getResourceAsStream("SqlXmlCompletionTokens.xml")).useDelimiter("\\A").next());
             } catch (JAXBException ex) {
@@ -60,11 +60,11 @@ public class SqlXmlCompletionTokens {
         }
         return instance;
     }
-    
+
     public List<SqlXmlCompletionItem> getSqlXmlCompletionItems(){
         return itemList;
     }
-    
+
     /**
      * Unmarshalling itself from XML document by JAXB annotations
      * @param xml xml document serialized as String

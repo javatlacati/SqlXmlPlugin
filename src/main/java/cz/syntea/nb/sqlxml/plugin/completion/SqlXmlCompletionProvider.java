@@ -50,7 +50,7 @@ public class SqlXmlCompletionProvider implements CompletionProvider {
 
     @Override
     public CompletionTask createTask(int queryType, JTextComponent jtc) {
-        if (queryType != CompletionProvider.COMPLETION_QUERY_TYPE) {
+        if (CompletionProvider.COMPLETION_QUERY_TYPE != queryType) {
             return null;
         }
 
@@ -59,7 +59,7 @@ public class SqlXmlCompletionProvider implements CompletionProvider {
             protected void query(CompletionResultSet completionResultSet, Document document, int caretOffset) {
                 String filter = null;
                 int startOffset = caretOffset - 1;
-                
+
                 try {
                     if(ContextFilter.outOfAllowed(document.getText(0, caretOffset).trim())){
                         completionResultSet.finish();
@@ -90,7 +90,7 @@ public class SqlXmlCompletionProvider implements CompletionProvider {
                     }
                 }
                 completionResultSet.finish();
-               
+
         }}, jtc);
     }
 
@@ -109,7 +109,7 @@ public class SqlXmlCompletionProvider implements CompletionProvider {
         int start = lineElement.getStartOffset();
         while (start + 1 < lineElement.getEndOffset()) {
             try {
-                if (doc.getText(start, 1).charAt(0) != ' ') {
+                if (' ' != doc.getText(start, 1).charAt(0)) {
                     break;
                 }
             } catch (BadLocationException ex) {

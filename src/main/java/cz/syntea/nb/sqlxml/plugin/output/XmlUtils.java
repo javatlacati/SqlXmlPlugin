@@ -33,6 +33,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -46,29 +47,29 @@ import org.xml.sax.SAXException;
  * @author Daniel Kec
  */
 public class XmlUtils {
-    
+
     public static String format(String stringXml) {
         return format(stringXml,null);
     }
-    
+
     public static String format(String stringXml,String encoding) {
         try {
             TransformerFactory transfac = TransformerFactory.newInstance();
             Transformer trans = transfac.newTransformer();
-            if(encoding!=null){
+            if(null != encoding){
                 trans.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
                 trans.setOutputProperty(OutputKeys.ENCODING, encoding);
             }else{
                 trans.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
             }
-                
+
             trans.setOutputProperty(OutputKeys.INDENT, "yes");
             StringWriter stringWriter = new StringWriter();
             StreamResult streamResult = new StreamResult(stringWriter);
             DOMSource source = new DOMSource(parse(stringXml));
             trans.transform(source, streamResult);
             return stringWriter.toString();
-        } catch (Exception ex) {
+        } catch (IllegalArgumentException | TransformerException ex) {
             Exceptions.printStackTrace(ex);
             return null;
         }
@@ -80,11 +81,7 @@ public class XmlUtils {
             DocumentBuilder db = dbf.newDocumentBuilder();
             InputSource is = new InputSource(new StringReader(stringXml));
             return db.parse(is);
-        } catch (ParserConfigurationException e) {
-            throw new RuntimeException(e);
-        } catch (SAXException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (ParserConfigurationException | SAXException | IOException e) {
             throw new RuntimeException(e);
         }
     }

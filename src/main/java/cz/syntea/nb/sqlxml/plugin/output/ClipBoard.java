@@ -55,8 +55,7 @@ public class ClipBoard implements ClipboardOwner {
 					(String) t.getTransferData(DataFlavor.stringFlavor);
 				return text;
 			}
-		} catch (UnsupportedFlavorException e) {
-		} catch (IOException e) {
+		} catch (UnsupportedFlavorException | IOException e) {
 		}
 		return null;
 	}

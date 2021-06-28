@@ -62,7 +62,7 @@ import org.openide.util.NbBundle.Messages;
    // @ActionReference(path = "Loaders/text/x-sql/Actions", position = 50),
     @ActionReference(path = "Editors/text/x-sql/Popup", position = 300),
     @ActionReference(path = "Shortcuts", name="D-S-X")
-    
+
 })
 @Messages("CTL_RunSqlXmlAction=Run SQLXML")
 public final class RunSqlXmlAction implements ActionListener {
@@ -78,16 +78,16 @@ public final class RunSqlXmlAction implements ActionListener {
         //FileUtil.getConfigObject("path/to/print/action/in/layer.xml", Action.class).actionPerformed(ev);
         //SQLEditorSupport sQLEditorSupport = (SQLEditorSupport)context;
         //SQLExecuteCookie sQLEditorSupport = (SQLExecuteCookie)context;
-        
+
         //System.out.println(""+Lookup.getDefault().lookup(SQLExecuteCookie.class));
-        
+
         XDCMOutputTopComponent out;
         out = XDCMOutputTopComponent.getDefault();
         Object invoked;
         Connection conn = null;
         try {
             invoked = context.getClass().getDeclaredMethod("getDatabaseConnection").invoke((Object) context);
-            if (invoked == null) {
+            if (null == invoked) {
                 return;
             }
             final DatabaseConnection databaseConnection = (DatabaseConnection) invoked;
@@ -99,16 +99,18 @@ public final class RunSqlXmlAction implements ActionListener {
                         return null;
                     }
             });
-            
+
             conn = databaseConnection.getJDBCConnection();
-            if(conn==null)return;
+            if(null == conn) {
+                return;
+            }
             ResultSet rs = conn.createStatement().executeQuery(getSql());
             if (rs.next()&&rs.getMetaData().getColumnCount()!=0) {
                 Object o;
                 try{
                     o = rs.getObject(1);
                 }catch(NullPointerException e){
-                    
+
                     Exception e2 = new JDBCDriverProblemException(e);//Exceptions.attachMessage(e, "There is a problem with jdbc driver!!!");
                     Exceptions.printStackTrace(e2);
                     rs.close();
@@ -124,20 +126,20 @@ public final class RunSqlXmlAction implements ActionListener {
                     out.printXML(XmlUtils.format(result));
                     out.open();
                     out.requestActive();
-                }else if(o instanceof String){                  
+                }else if(o instanceof String){
                     out.printXML(XmlUtils.format((String)o));
                     out.open();
                     out.requestActive();
                 }else{
                     NotificationDisplayer.getDefault().notify(
                         "SqlXml Plugin",
-                        ImageUtilities.loadImageIcon("/cz/syntea/nb/sqlxml/plugin/run.png", true), 
+                        ImageUtilities.loadImageIcon("/cz/syntea/nb/sqlxml/plugin/run.png", true),
                         "Unknow datatype in the first column of the first row.\n"
                       + "Found datatype: "+o.getClass().getName()+",\n"
                       + "Supported datatypes: SQLXML,Clob,String",
                         null);
                 }
-                
+
             }
             rs.close();
 
@@ -145,14 +147,14 @@ public final class RunSqlXmlAction implements ActionListener {
             if(ex.getMessage().contains("Unsupported feature")){
                  NotificationDisplayer.getDefault().notify(
                         "SqlXml Plugin",
-                        ImageUtilities.loadImageIcon("/cz/syntea/nb/sqlxml/plugin/run.png", true), 
+                        ImageUtilities.loadImageIcon("/cz/syntea/nb/sqlxml/plugin/run.png", true),
                         "JDBC Driver says: \"Unsupported feature\", more info in IDE Log.\n"
                       + "If your driver doesn't support SQLXML type, use XMLSERIALIZE",
                         null);
             }
             ex.printStackTrace();
             try {
-                // when there is error in the query, lets run standard run statement action 
+                // when there is error in the query, lets run standard run statement action
                 // it will show errors by standard means
                 context.getClass().getDeclaredMethod("execute").invoke((Object) context);
             } catch (Exception ex1) {
@@ -170,13 +172,13 @@ public final class RunSqlXmlAction implements ActionListener {
             if(text.endsWith(";")){
                 text = text.substring(0,text.length()-1);
             }
-            
+
             //It have to be only one query
             if(text.contains(";")){
                 int[] pos = calculatePos(text, ";");
                 NotificationDisplayer.getDefault().notify(
                         "SqlXml Plugin",
-                        ImageUtilities.loadImageIcon("/cz/syntea/nb/sqlxml/plugin/run.png", true), 
+                        ImageUtilities.loadImageIcon("/cz/syntea/nb/sqlxml/plugin/run.png", true),
                         "Please remove the semicolon, query must have only one statement.\n"
                       + "Semicolon is located on the row= "+pos[0]+", column= "+pos[1],
                         null);
@@ -187,7 +189,7 @@ public final class RunSqlXmlAction implements ActionListener {
         }
         return null;
     }
-    
+
     private int[] calculatePos(String text,String mask){
         int[] vector = new int[2];
         try{
@@ -207,7 +209,7 @@ public final class RunSqlXmlAction implements ActionListener {
      * @param data clob na prevedeni
      * @return vysledny string
      * @throws SQLException
-     * @throws IOException 
+     * @throws IOException
      */
     public static String clobToString(Clob data) throws SQLException, IOException {
         StringBuilder sb = new StringBuilder();
